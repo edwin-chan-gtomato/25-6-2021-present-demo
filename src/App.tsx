@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import NavBar from "./components/navbar";
+const CssModulesDemo = lazy(() => import('./components/cssModules'));
+const InlineCssDemo = lazy(() => import('./components/inline'));
+const LinariaDemo = lazy(() => import('./components/linaria'));
+const StyledComponentDemo = lazy(() => import('./components/styledCom'));
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Suspense fallback={<span>Loading...</span>}>
+        <Router>
+          <Switch>
+            <Route exact path="/" render={() => <><NavBar /><div>home</div></>} />
+            <Route path="/inline" component={InlineCssDemo} />
+            <Route path="/modules" component={CssModulesDemo} />
+            <Route path="/styled-components" component={StyledComponentDemo} />
+            <Route path="/linaria" component={LinariaDemo} />
+          </Switch>
+
+        </Router >
+      </Suspense>
+    </>
   );
 }
 
