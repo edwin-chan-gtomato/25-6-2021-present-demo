@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { numberToRender } from "./shared";
 
 const Container = styled.div`
 height: 100vh;
@@ -9,17 +10,17 @@ height: 100vh;
   flex-flow: row wrap;
 `
 
-const Box = styled.div`
+const Box1 = styled.div`
   height: 50px;
   width: 50px;
   border: 1px solid white;
-  ${({ color }) => color === 'red' ?
-        css`
   background-color: red;
-` : css`
-  background-color: blue;
 `
-    }
+const Box2 = styled.div`
+  height: 50px;
+  width: 50px;
+  border: 1px solid white;
+  background-color: blue;
 `
 
 const StyledCom = () => {
@@ -27,10 +28,17 @@ const StyledCom = () => {
 
     const renderBoxes = () => {
         let boxes = [];
-        for (var i = 0; i < 5000; i++) {
-            boxes.push(
-                <Box color={toggle ? 'red' : 'blue'} key={i} ></Box>
-            );
+        for (var i = 0; i < numberToRender; i++) {
+            if (toggle) {
+                boxes.push(
+                    <Box1 key={i} ></Box1>
+                );
+            }
+            else {
+                boxes.push(
+                    <Box2 key={i} ></Box2>
+                );
+            }
         }
         return boxes;
     };
@@ -40,7 +48,7 @@ const StyledCom = () => {
     useEffect(() => {
         const repeatToggling = setInterval(() => {
             console.log(new Date().getTime() - startTime);
-            if (new Date().getTime() - startTime > 10000) {
+            if (new Date().getTime() - startTime > 5000) {
                 clearInterval(repeatToggling);
                 return;
             }

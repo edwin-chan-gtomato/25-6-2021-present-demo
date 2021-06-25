@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { styled } from '@linaria/react';
-import { css } from '@linaria/core';
+import React, { useEffect, useState } from "react";
 
 const Container = styled.div`
 height: 100vh;
@@ -34,7 +33,7 @@ const Linaria = () => {
   useEffect(() => {
     const repeatToggling = setInterval(() => {
       console.log(new Date().getTime() - startTime);
-      if (new Date().getTime() - startTime > 10000) {
+      if (new Date().getTime() - startTime > 5000) {
         clearInterval(repeatToggling);
         return;
       }

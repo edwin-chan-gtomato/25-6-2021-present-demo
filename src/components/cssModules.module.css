@@ -12,10 +12,20 @@
   border: 1px solid white;
 }
 
+.box:hover {
+  background-color: black;
+}
+
 .red {
   background-color: red;
 }
 
 .blue {
   background-color: blue;
+}
+
+@media (max-width: 500px) {
+  .box {
+    background-color: green;
+  }
 }
